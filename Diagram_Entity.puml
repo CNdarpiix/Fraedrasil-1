@@ -1,0 +1,87 @@
+@startuml
+
+
+class User {
+  id : Long
+  username : String
+  email : String
+  password : String
+  streak : int
+  createdAt : LocalDateTime
+  cosmeticXp : int
+  cosmeticLvl : int
+}
+
+
+class TaskResult {
+  id : Long
+  answer : List<Integer>
+  task : studyTask
+  user : User
+  clarityScore : int
+  createdAt : LocalDateTime
+}
+
+class StudyTask {
+  id : Long
+  title : String
+  description : String
+  question : String
+  option : List<String>
+  answer : List<Integer>
+  difficulty : int
+  estimatedMinutes : int
+  completed : boolean
+  requiredResponsibilityLevel : int
+  createdAt : LocalDateTime
+}
+
+class StudyZone {
+  id : Long
+  name : String
+  aspect : Aspect
+  studyTasks : List<StudyTask>
+  userZoneProgresses : List<UserZoneProgress>
+}
+
+
+class Aspect {
+  id : Long
+  name : String
+  domain : Domain
+  zones : List<StudyZone>
+}
+
+
+class Domain {
+  id : Long
+  name : String
+  aspects : List<Aspect>
+}
+
+class UserZoneProgress {
+  id : Long
+  user : User
+  zone : StudyZone
+  responsibilityLevel : int
+  consecutiveHighClarity : int
+  totalAttempts : int
+  lastClarityScores : List<Integer>
+  stabilized : boolean
+}
+
+Domain "1" -- "0..*" Aspect
+Aspect "1" -- "0..*" StudyZone
+StudyZone "1" -- "0..*" UserZoneProgress
+StudyZone "1" -- "0..*" StudyTask
+StudyTask "1" -- "0..*" TaskResult
+User "1" -- "0..*" TaskResult
+User "1" -- "0..*" UserZoneProgress
+
+
+
+
+
+
+
+@enduml

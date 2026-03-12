@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package controller {
+class StudyTaskController
+class UserController
+}
+
+package repository {
+class AspectRepository
+class DomainRepository
+class StudyTaskRepository
+class studyZoneRepository
+class TaskResultRepository
+class UserRepository
+class UserZoneProgressRepository
+}
+
+package service {
+class StudyTaskService
+class TaskPlayService
+class UserService
+class UserZoneProgressService
+}
+
+UserController --> UserService
+StudyTaskController --> StudyTaskService
+StudyTaskController --> TaskPlayService
+
+TaskPlayService --> UserZoneProgressService
+TaskPlayService --> TaskResultRepository
+TaskPlayService --> StudyTaskRepository
+TaskPlayService --> UserRepository
+StudyTaskService --> StudyTaskRepository
+StudyTaskService --> UserRepository
+StudyTaskService --> UserZoneProgressRepository
+UserService --> UserRepository
+UserZoneProgressService --> UserRepository
+UserZoneProgressService --> studyZoneRepository
+UserZoneProgressService --> UserZoneProgressRepository
+
+
+@enduml

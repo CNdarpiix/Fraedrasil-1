@@ -1,0 +1,16 @@
+POST http://localhost:8080/api/tasks/1
+Content-Type: application/json
+
+{
+  "title": "string",
+  "description": "string",
+  "question": "string",
+  "option": [
+    "string"
+  ],
+  "answer": [
+    0
+  ],
+  "estimatedMinute": 1,
+  "difficulty": 1
+}
