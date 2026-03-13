@@ -72,3 +72,8 @@ POST /api/tasks/{userId}/{taskId}/play
 - learning sessions
 - authentication
 - frontend interface
+
+## Quick Links
+- Git Hub : https://github.com/CNdarpiix/Fraedrasil-1
+- API : https://fraedrasil-v1.onrender.com
+- Live swagger : https://fraedrasil-v1.onrender.com/swagger-ui/index.html
