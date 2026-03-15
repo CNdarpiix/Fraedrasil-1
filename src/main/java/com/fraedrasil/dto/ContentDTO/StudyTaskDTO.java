@@ -1,4 +1,4 @@
-package com.fraedrasil.dto;
+package com.fraedrasil.dto.ContentDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

@@ -1,6 +1,6 @@
 package com.fraedrasil.service;
 
-import com.fraedrasil.dto.StudyTaskDTO;
+import com.fraedrasil.dto.ContentDTO.StudyTaskDTO;
 import com.fraedrasil.entity.StudyTask;
 import com.fraedrasil.entity.StudyZone;
 import com.fraedrasil.entity.UserZoneProgress;
