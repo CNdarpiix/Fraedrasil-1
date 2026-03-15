@@ -28,34 +28,34 @@ public class DataInitializer {
 
 
         {
-            /// Domain
-            /// Domain algorithmes = new Domain();
-            /// algorithmes.setName("Monde Algorithmiques");
-            /// domainRepo.save(algorithmes);
+             /// Domain
+             Domain algorithmes = new Domain();
+             algorithmes.setName("Monde Algorithmiques");
+             domainRepo.save(algorithmes);
 
 
-            ///  Aspects
-            /// Aspect logic = new Aspect();
-            /// logic.setName("Logique algorithmique");
-            /// logic.setDomain(algorithmes);
-            /// aspectRepo.save(logic);
+              /// Aspects
+             Aspect logic = new Aspect();
+             logic.setName("Logique algorithmique");
+             logic.setDomain(algorithmes);
+             aspectRepo.save(logic);
 
-            ///  Zones
-            /// StudyZone conditions = new StudyZone();
-            /// conditions.setName("Conditions");
-            /// conditions.setAspect(logic);
-            ///zoneRepo.save(conditions);
+              /// Zones
+             StudyZone conditions = new StudyZone();
+             conditions.setName("Conditions");
+             conditions.setAspect(logic);
+            zoneRepo.save(conditions);
 
-            ///  Tasks
-            /// StudyTask task = new StudyTask();
-            /// task.setTitle("Identifier condition vraie");
-            /// task.setDescription("Comprendre une condition logique");
-            ///task.setQuestion("Que vaut : 5 > 3 ?");
-            ///task.setDifficulty(1);
-            ///task.setEstimatedMinutes(2);
-            ///task.setStudyZone(conditions);
+              /// Tasks
+             StudyTask task = new StudyTask();
+             task.setTitle("Identifier condition vraie");
+             task.setDescription("Comprendre une condition logique");
+            task.setQuestion("Que vaut : 5 > 3 ?");
+            task.setDifficulty(1);
+            task.setEstimatedMinutes(2);
+            task.setStudyZone(conditions);
 
-            ///taskRepo.save(task);
+            taskRepo.save(task);
 
 
         };
