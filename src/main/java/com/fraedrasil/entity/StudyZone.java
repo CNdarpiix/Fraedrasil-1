@@ -11,26 +11,28 @@ public class StudyZone {
     /// Attributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
     @NotBlank
-    private String name ;
+    private String name;
 
-    @ManyToOne(fetch =FetchType.LAZY)
-    @JoinColumn(name = "aspect_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aspect_id", nullable = false)
     @JsonIgnore
-    private Aspect aspect ;
+    private Aspect aspect;
 
     @OneToMany(mappedBy = "studyZone", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<StudyTask> studyTasks ;
+    private List<StudyTask> studyTasks;
 
-    @OneToMany(mappedBy = "zone" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "zone", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<UserZoneProgress> userZoneProgresses ;
+    private List<UserZoneProgress> userZoneProgresses;
+
     /// Constructeur
-    public StudyZone(){
+    public StudyZone() {
     }
+
     /// getters
     public Long getId() {
         return id;
@@ -43,6 +45,7 @@ public class StudyZone {
     public Aspect getAspect() {
         return aspect;
     }
+
     public List<StudyTask> getStudyTasks() {
         return studyTasks;
     }

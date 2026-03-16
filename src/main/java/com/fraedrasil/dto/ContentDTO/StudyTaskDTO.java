@@ -32,6 +32,10 @@ public class StudyTaskDTO {
     @Positive
     private int difficulty ;
 
+    public StudyTaskDTO(String title){
+        this.title = title ;
+    }
+
     public StudyTaskDTO(String title , String description , String question , List<String> option , List<Integer> answer , int estimatedMinute , int difficulty){
         this.title = title ;
         this.description = description ;
