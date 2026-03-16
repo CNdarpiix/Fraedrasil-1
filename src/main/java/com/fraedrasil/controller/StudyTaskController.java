@@ -23,20 +23,14 @@ public class StudyTaskController {
         this.taskPlayService = taskPlayService;
     }
 
-    @PostMapping("/{zoneId}")
-    public StudyTask createTask(@PathVariable Long zoneId, @RequestBody StudyTaskDTO task) {
-        return studyTaskService.createTaskDTO(task, zoneId);
-    }
-
-
-    @PostMapping("/{userId}/{taskId}/play")
+    @PostMapping("/{taskId}/{userId}/play")
     public TaskResult playTask(@PathVariable Long userId, @PathVariable Long taskId, @RequestBody PlayTaskRequestDTO request) {
         return taskPlayService.playTask(userId, taskId, request.getAnswers());
     }
 
-    @GetMapping
-    public List<TaskResponseDTO> getTask() {
-        return taskPlayService.getAllTasks();
+    @GetMapping("{taskId}")
+    public TaskResponseDTO getTask(@PathVariable Long taskId) {
+        return taskPlayService.getTask(taskId);
     }
 
 }//End class

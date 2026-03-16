@@ -1,5 +1,6 @@
 package com.fraedrasil.service;
 
+import com.fraedrasil.dto.ContentDTO.StudyTaskDTO;
 import com.fraedrasil.dto.TaskResponseDTO;
 import com.fraedrasil.entity.*;
 import com.fraedrasil.entity.StudyTask;
@@ -78,15 +79,13 @@ public class TaskPlayService {
     }
 
     @Transactional
-    public List<TaskResponseDTO> getAllTasks(){
-        List<StudyTask> tasks = taskRepository.findAll();
+    public TaskResponseDTO getTask(Long taskId){
+        StudyTask task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new TaskNotFoundException("Task not found by id :" + 1));
 
-        return tasks.stream().map(task -> new TaskResponseDTO(
-                task.getId(),
-                task.getTitle(),
+        return new TaskResponseDTO(task.getTitle(),
                 task.getQuestion(),
-                task.getDifficulty()))
-                .toList();
+                task.getDifficulty());
     }
 
 
