@@ -27,10 +27,9 @@ public class StudyZoneDTO {
         this.name = name;
     }
 
-    public StudyZoneDTO(String name, AspectDTO aspect, List<StudyTaskDTO> studyTasks) {
+    public StudyZoneDTO(String name, AspectDTO aspect) {
         this.name = name;
         this.aspect = aspect;
-        this.studyTasks.addAll(studyTasks);
     }
 
 

@@ -1,12 +1,12 @@
 package com.fraedrasil.controller;
 
 
+import com.fraedrasil.dto.ContentDTO.AspectDTO;
 import com.fraedrasil.dto.ContentDTO.DomainDTO;
+import com.fraedrasil.dto.ContentDTO.StudyZoneDTO;
 import com.fraedrasil.service.ContentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -20,7 +20,9 @@ public class ContentController {
         this.contentService = contentService;
     }
 
-    @GetMapping("api/content/domain/")
+    ///  Domain
+
+    @GetMapping("api/content/domain")
     public List<DomainDTO> getAllDomainDto(){
         return contentService.getAllDomain() ;
     }
@@ -29,5 +31,31 @@ public class ContentController {
     public DomainDTO getDomainById(@PathVariable Long domainId){
         return contentService.getDomainById(domainId);
     }
+
+    /// Aspect
+
+    @GetMapping("api/content/domain/{domainId}/aspect/")
+    public List<AspectDTO> getAllAspectFromDomainId(@PathVariable Long domainId) {
+        return contentService.getAllAspectFromDomainId(domainId);
+    }
+
+    @GetMapping("api/content/domain/aspect/{aspectId}")
+    public AspectDTO getAspectFromId(@PathVariable Long aspectId){
+        return contentService.getAspectFromId(aspectId);
+    }
+
+    /// Zone
+
+    @GetMapping("api/content/domain/aspect/{aspectId}/zone/")
+    public List<StudyZoneDTO> getAllZoneFromAspectId(@PathVariable Long aspectId){
+        return contentService.getAllZoneFromAspectId(aspectId);
+    }
+
+    @GetMapping("api/content/domain/aspect/zone/{zoneId}")
+    public StudyZoneDTO getZoneById(@PathVariable Long zoneId){
+        return contentService.getZoneFromId(zoneId);
+    }
+
+
 
 }

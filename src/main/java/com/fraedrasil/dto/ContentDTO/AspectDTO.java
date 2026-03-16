@@ -27,10 +27,9 @@ public class AspectDTO {
         this.name = name;
     }
 
-    public AspectDTO(String name , DomainDTO domain , List<StudyZoneDTO> studyZoneDTOS) {
+    public AspectDTO(String name , DomainDTO domain) {
         this.name = name ;
         this.domain = domain;
-        zones.addAll(studyZoneDTOS) ;
     }
 
     ///  Getters & Setters
