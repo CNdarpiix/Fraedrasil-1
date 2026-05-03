@@ -12,6 +12,8 @@ import com.fraedrasil.exception.ContentException.AspectNotFoundException;
 import com.fraedrasil.exception.ContentException.DomainNotFoundException;
 import com.fraedrasil.exception.ContentException.TaskNotFoundException;
 import com.fraedrasil.exception.ZoneNotFoundException;
+import com.fraedrasil.mapper.contentMapper.AspectMapper;
+import com.fraedrasil.mapper.contentMapper.DomainMapper;
 import com.fraedrasil.repository.AspectRepository;
 import com.fraedrasil.repository.DomainRepository;
 import com.fraedrasil.repository.StudyTaskRepository;
@@ -41,8 +43,7 @@ public class ContentService {
     public List<DomainDTO> getAllDomain() {
         return domainRepository.findAll()
                 .stream()
-                .map(domain -> new DomainDTO(
-                        domain.getName())
+                .map(DomainMapper:: toDTO
                 ).toList();
     }
 
@@ -51,7 +52,7 @@ public class ContentService {
         Domain domain = domainRepository.findById(domainId)
                 .orElseThrow(() -> new DomainNotFoundException("Domain not found by id :" + domainId));
 
-        return new DomainDTO(domain.getName());
+        return DomainMapper.toDTO(domain);
     }
 
     /// Aspect
@@ -63,7 +64,7 @@ public class ContentService {
         return domain.
                 getAspects()
                 .stream()
-                .map(aspect -> new AspectDTO(aspect.getName()))
+                .map(AspectMapper :: toDTO)
                 .toList();
     }
 
@@ -72,11 +73,7 @@ public class ContentService {
         Aspect aspect = this.aspectRepository.findById(aspectId)
                 .orElseThrow(() -> new AspectNotFoundException("Aspect not found by id :" + aspectId));
 
-        Domain domain = aspect.getDomain();
-
-        DomainDTO domainDTO = new DomainDTO(domain.getName());
-
-        return new AspectDTO(aspect.getName(), domainDTO);
+        return AspectMapper.toDTO(aspect);
     }
 
     /// StudyZone

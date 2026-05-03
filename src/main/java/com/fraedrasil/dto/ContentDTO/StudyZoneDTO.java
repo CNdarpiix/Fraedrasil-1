@@ -1,15 +1,15 @@
 package com.fraedrasil.dto.ContentDTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
 public class StudyZoneDTO {
+    @Id
+    private Long id;
+
     @NotBlank
     private String name;
 
@@ -23,17 +23,28 @@ public class StudyZoneDTO {
     private List<StudyTaskDTO> studyTasks;
 
     ///  Constructors
-    public StudyZoneDTO(String name) {
+    public StudyZoneDTO(Long id, String name) {
         this.name = name;
+        this.id = id;
     }
 
-    public StudyZoneDTO(String name, AspectDTO aspect) {
+    public StudyZoneDTO(Long id, String name, AspectDTO aspect) {
+        this.id = id;
         this.name = name;
         this.aspect = aspect;
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     /// Getters & Setters
+
 
     public List<StudyTaskDTO> getStudyTasks() {
         return studyTasks;

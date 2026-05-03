@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 public class StudyTaskDTO {
-    private Long id ;
+    private Long id;
 
     @NotBlank
     @Column(nullable = false)
@@ -18,34 +18,48 @@ public class StudyTaskDTO {
     private String description;
 
     @NotBlank
-    private String question ;
+    private String question;
 
     @ElementCollection
-    private List<String> option ;
+    private List<String> option;
 
     @ElementCollection
-    private List<Integer> answer ;
+    private List<Integer> answer;
 
     @Positive
-    private int estimatedMinutes ;
+    private int estimatedMinutes;
 
     @Positive
-    private int difficulty ;
+    private int difficulty;
 
-    public StudyTaskDTO(String title){
-        this.title = title ;
+    public StudyTaskDTO(Long id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
-    public StudyTaskDTO(String title , String description , String question , List<String> option , List<Integer> answer , int estimatedMinute , int difficulty){
-        this.title = title ;
-        this.description = description ;
-        this.question = question ;
-        this.option = option ;
-        this.answer = answer ;
-        this.estimatedMinutes = estimatedMinute ;
-        this.difficulty = difficulty ;
+    public StudyTaskDTO(Long id, String title, String description, String question, List<String> option, List<Integer> answer, int estimatedMinute, int difficulty) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.question = question;
+        this.option = option;
+        this.answer = answer;
+        this.estimatedMinutes = estimatedMinute;
+        this.difficulty = difficulty;
     }
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getEstimatedMinutes() {
+        return estimatedMinutes;
+    }
 
     public List<Integer> getAnswer() {
         return answer;

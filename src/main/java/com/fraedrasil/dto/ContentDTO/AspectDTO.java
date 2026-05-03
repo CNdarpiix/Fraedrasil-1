@@ -8,6 +8,9 @@ import java.util.List;
 
 public class AspectDTO {
     /// Attributs
+    @Id
+    private Long id;
+
     @NotBlank
     private String name;
 
@@ -23,16 +26,31 @@ public class AspectDTO {
 
     /// Constructors
 
-    public AspectDTO(String name) {
+    public AspectDTO(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public AspectDTO(String name , DomainDTO domain) {
-        this.name = name ;
+    public AspectDTO(Long id, String name, DomainDTO domain) {
+        this.id = id;
+        this.name = name;
         this.domain = domain;
     }
 
+
     ///  Getters & Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<StudyZoneDTO> getZones() {
+        return zones;
+    }
 
     public void setZones(List<StudyZoneDTO> zones) {
         this.zones = zones;
