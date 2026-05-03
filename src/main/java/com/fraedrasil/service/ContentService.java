@@ -14,6 +14,8 @@ import com.fraedrasil.exception.ContentException.TaskNotFoundException;
 import com.fraedrasil.exception.ZoneNotFoundException;
 import com.fraedrasil.mapper.contentMapper.AspectMapper;
 import com.fraedrasil.mapper.contentMapper.DomainMapper;
+import com.fraedrasil.mapper.contentMapper.StudyTaskMapper;
+import com.fraedrasil.mapper.contentMapper.StudyZoneMapper;
 import com.fraedrasil.repository.AspectRepository;
 import com.fraedrasil.repository.DomainRepository;
 import com.fraedrasil.repository.StudyTaskRepository;
@@ -43,7 +45,7 @@ public class ContentService {
     public List<DomainDTO> getAllDomain() {
         return domainRepository.findAll()
                 .stream()
-                .map(DomainMapper:: toDTO
+                .map(DomainMapper::toDTO
                 ).toList();
     }
 
@@ -64,7 +66,7 @@ public class ContentService {
         return domain.
                 getAspects()
                 .stream()
-                .map(AspectMapper :: toDTO)
+                .map(AspectMapper::toDTO)
                 .toList();
     }
 
@@ -82,11 +84,11 @@ public class ContentService {
         Aspect aspect = this.aspectRepository.findById(aspectId)
                 .orElseThrow(() -> new AspectNotFoundException("Aspect not found by id :" + aspectId));
 
-        return aspect
-                .getZones()
+        return aspect.
+                getZones()
                 .stream()
-                .map(StudyZone -> new StudyZoneDTO(StudyZone.getName())
-                ).toList();
+                .map(StudyZoneMapper::toDTO)
+                .toList();
     }
 
     @Transactional
@@ -94,9 +96,7 @@ public class ContentService {
         StudyZone zone = studyZoneRepository.findById(zoneId)
                 .orElseThrow(() -> new ZoneNotFoundException("Zone not found by id :" + zoneId));
 
-        AspectDTO aspectDTO = new AspectDTO(zone.getAspect().getName());
-
-        return new StudyZoneDTO(zone.getName(), aspectDTO);
+        return StudyZoneMapper.toDTO(zone);
     }
 
     /// StudyTask
@@ -106,10 +106,10 @@ public class ContentService {
         StudyZone zone = studyZoneRepository.findById(zoneId)
                 .orElseThrow(() -> new ZoneNotFoundException("Zone not found with id :" + zoneId));
 
-        return zone.getStudyTasks()
+        return zone
+                .getStudyTasks()
                 .stream()
-                .map(task -> new StudyTaskDTO(
-                        task.getTitle()))
+                .map(StudyTaskMapper::toDTO)
                 .toList();
     }
 
@@ -117,14 +117,7 @@ public class ContentService {
     public StudyTaskDTO getTaskById(Long taskId) {
         StudyTask task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found by id :" + taskId));
-
-        return new StudyTaskDTO(
-                task.getTitle(),
-                task.getDescription(),
-                task.getQuestion(),
-                task.getOption(),
-                task.getAnswer(),
-                task.getEstimatedMinutes(),
-                task.getDifficulty());
+        return StudyTaskMapper.toDTO(task);
     }
+
 }
