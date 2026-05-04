@@ -1,14 +1,12 @@
 package com.fraedrasil.service;
 
-import com.fraedrasil.dto.ContentDTO.StudyTaskDTO;
-import com.fraedrasil.dto.TaskResponseDTO;
-import com.fraedrasil.entity.*;
+import com.fraedrasil.dto.TaskUserDTO.TaskResponseDTO;
 import com.fraedrasil.entity.StudyTask;
 import com.fraedrasil.entity.TaskResult;
 import com.fraedrasil.entity.User;
 import com.fraedrasil.exception.TaskNotFoundException;
 import com.fraedrasil.exception.UserNotFoundException;
-import com.fraedrasil.repository.*;
+import com.fraedrasil.mapper.TaskUserMapper.TaskResponseMapper;
 import com.fraedrasil.repository.StudyTaskRepository;
 import com.fraedrasil.repository.TaskResultRepository;
 import com.fraedrasil.repository.UserRepository;
@@ -79,15 +77,12 @@ public class TaskPlayService {
     }
 
     @Transactional
-    public TaskResponseDTO getTask(Long taskId){
+    public TaskResponseDTO getTask(Long taskId) {
         StudyTask task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found by id :" + 1));
 
-        return new TaskResponseDTO(task.getTitle(),
-                task.getQuestion(),
-                task.getDifficulty());
+        return TaskResponseMapper.toDTO(task);
     }
-
 
 
 }//End class

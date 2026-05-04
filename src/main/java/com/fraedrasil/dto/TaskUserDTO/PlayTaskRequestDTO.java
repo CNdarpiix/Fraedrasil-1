@@ -1,4 +1,4 @@
-package com.fraedrasil.dto;
+package com.fraedrasil.dto.TaskUserDTO;
 
 import java.util.List;
 

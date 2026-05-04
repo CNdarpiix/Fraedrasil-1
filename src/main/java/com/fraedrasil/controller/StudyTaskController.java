@@ -1,16 +1,12 @@
 package com.fraedrasil.controller;
 
 
-import com.fraedrasil.dto.PlayTaskRequestDTO;
-import com.fraedrasil.dto.ContentDTO.StudyTaskDTO;
-import com.fraedrasil.dto.TaskResponseDTO;
-import com.fraedrasil.entity.StudyTask;
+import com.fraedrasil.dto.TaskUserDTO.PlayTaskRequestDTO;
+import com.fraedrasil.dto.TaskUserDTO.TaskResponseDTO;
 import com.fraedrasil.entity.TaskResult;
 import com.fraedrasil.service.StudyTaskService;
 import com.fraedrasil.service.TaskPlayService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/tasks")

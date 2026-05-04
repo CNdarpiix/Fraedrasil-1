@@ -3,7 +3,7 @@ package com.fraedrasil.controller;
 import com.fraedrasil.dto.UserDto.CreateUserDTO;
 import com.fraedrasil.dto.UserDto.GetUserDTO;
 import com.fraedrasil.dto.UserDto.UpdateUserDto;
-import com.fraedrasil.dto.UserProgressionDTO;
+import com.fraedrasil.dto.TaskUserDTO.UserProgressionDTO;
 import com.fraedrasil.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

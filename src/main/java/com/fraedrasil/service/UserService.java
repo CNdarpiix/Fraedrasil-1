@@ -3,9 +3,13 @@ package com.fraedrasil.service;
 import com.fraedrasil.dto.UserDto.CreateUserDTO;
 import com.fraedrasil.dto.UserDto.GetUserDTO;
 import com.fraedrasil.dto.UserDto.UpdateUserDto;
-import com.fraedrasil.dto.UserProgressionDTO;
+import com.fraedrasil.dto.TaskUserDTO.UserProgressionDTO;
 import com.fraedrasil.entity.User;
 import com.fraedrasil.exception.UserNotFoundException;
+import com.fraedrasil.mapper.TaskUserMapper.UserProgressionMapper;
+import com.fraedrasil.mapper.userMapper.CreateUserMapper;
+import com.fraedrasil.mapper.userMapper.GetUserMapper;
+import com.fraedrasil.mapper.userMapper.UpdateUserMapper;
 import com.fraedrasil.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,22 +28,16 @@ public class UserService {
     }
 
     public CreateUserDTO save(CreateUserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+       User user = CreateUserMapper.toEntity(userDTO);
 
         userRepository.save(user);
-        return new CreateUserDTO(user.getUsername() , user.getEmail() , user.getPassword());
+        return CreateUserMapper.createUserDTO(user);
     }
 
     public List<GetUserDTO> findAll() {
         return userRepository.findAll()
                 .stream()
-                .map(user -> new GetUserDTO(
-                        user.getId(),
-                        user.getUsername(),
-                        user.getEmail()))
+                .map(GetUserMapper::getUserDTO)
                 .toList();
     }
 
@@ -48,24 +46,20 @@ public class UserService {
         User user = userRepository.findById(userID)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        return new UserProgressionDTO(user.getId(), user.getUsername(), user.getCosmeticLvl(), user.getCosmeticXp(), user.getTasks().size());
+        return UserProgressionMapper.toDTO(user);
     }
 
     public GetUserDTO findByIdDto(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        return new GetUserDTO(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail()
-        );
+        return GetUserMapper.getUserDTO(user);
     }
 
     public void deleteUserById(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
-            ;
+
         } else {
             throw new UserNotFoundException("User not Found");
         }
@@ -79,7 +73,7 @@ public class UserService {
 
         userRepository.save(existingUser);
 
-        return new UpdateUserDto(existingUser.getUsername());
+        return UpdateUserMapper.updateUserDto(existingUser);
     }
 
     private User findById(Long userId) {

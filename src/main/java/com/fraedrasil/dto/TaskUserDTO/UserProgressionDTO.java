@@ -1,7 +1,7 @@
-package com.fraedrasil.dto;
+package com.fraedrasil.dto.TaskUserDTO;
 
 public class UserProgressionDTO {
-    private Long id ;
+    private Long id ;// User ID
     private String username ;
     private int cosmeticLvl ;
     private int cosmeticXp ;
@@ -27,6 +27,10 @@ public class UserProgressionDTO {
 
     public int getCosmeticLvl() {
         return cosmeticLvl;
+    }
+
+    public int getCosmeticXp() {
+        return cosmeticXp;
     }
 
     public int getTaskStarted() {
