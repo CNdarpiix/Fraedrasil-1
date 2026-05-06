@@ -67,8 +67,8 @@ public class UserZoneProgressService {
         }
     }
 
-    @Transactional
-    public void incrementStreak(UserZoneProgress progress, int clarityScore) {//incrémente la streak
+
+    private void incrementStreak(UserZoneProgress progress, int clarityScore) {//incrémente la streak
         if (clarityScore >= 8) {
             progress.setConsecutiveHighClarity(
                     progress.getConsecutiveHighClarity() + 1
@@ -78,8 +78,8 @@ public class UserZoneProgressService {
         }
     }
 
-    @Transactional
-    public void updateHistory(UserZoneProgress progress, int clarityScore) {
+
+    private void updateHistory(UserZoneProgress progress, int clarityScore) {
         progress.getLastClarityScores().add(clarityScore);
 
         if (progress.getLastClarityScores().size() > 10) {
@@ -87,8 +87,8 @@ public class UserZoneProgressService {
         }
     }
 
-    @Transactional
-    public double average(UserZoneProgress progress) {
+
+    private double average(UserZoneProgress progress) {
         return progress.getLastClarityScores()
                 .stream()
                 .mapToInt(Integer::intValue)
@@ -96,8 +96,8 @@ public class UserZoneProgressService {
                 .orElse(0.0);
     }
 
-    @Transactional
-    public boolean isPromote(UserZoneProgress progress) {
+
+    private boolean isPromote(UserZoneProgress progress) {
         boolean conditionA = progress.getConsecutiveHighClarity() >= 5;
 
         boolean conditionB =
@@ -107,8 +107,8 @@ public class UserZoneProgressService {
         return conditionB || conditionA;
     }
 
-    @Transactional
-    public void promote(UserZoneProgress progress) {
+
+    private void promote(UserZoneProgress progress) {
         progress.setResponsibilityLevel(
                 progress.getResponsibilityLevel() + 1
         );

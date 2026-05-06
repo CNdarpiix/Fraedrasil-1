@@ -41,7 +41,7 @@ public class ContentService {
     }
 
     ///  Domains
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DomainDTO> getAllDomain() {
         return domainRepository.findAll()
                 .stream()
@@ -49,7 +49,7 @@ public class ContentService {
                 ).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public DomainDTO getDomainById(Long domainId) {
         Domain domain = domainRepository.findById(domainId)
                 .orElseThrow(() -> new DomainNotFoundException("Domain not found by id :" + domainId));
@@ -58,7 +58,7 @@ public class ContentService {
     }
 
     /// Aspect
-    @Transactional
+    @Transactional(readOnly = true)
     public List<AspectDTO> getAllAspectFromDomainId(Long domainId) {
         Domain domain = domainRepository.findById(domainId)
                 .orElseThrow(() -> new DomainNotFoundException("Domain not found by id :" + domainId));
@@ -70,7 +70,7 @@ public class ContentService {
                 .toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public AspectDTO getAspectFromId(Long aspectId) {
         Aspect aspect = this.aspectRepository.findById(aspectId)
                 .orElseThrow(() -> new AspectNotFoundException("Aspect not found by id :" + aspectId));
@@ -79,7 +79,7 @@ public class ContentService {
     }
 
     /// StudyZone
-    @Transactional
+    @Transactional(readOnly = true)
     public List<StudyZoneDTO> getAllZoneFromAspectId(Long aspectId) {
         Aspect aspect = this.aspectRepository.findById(aspectId)
                 .orElseThrow(() -> new AspectNotFoundException("Aspect not found by id :" + aspectId));
@@ -91,7 +91,7 @@ public class ContentService {
                 .toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public StudyZoneDTO getZoneFromId(Long zoneId) {
         StudyZone zone = studyZoneRepository.findById(zoneId)
                 .orElseThrow(() -> new ZoneNotFoundException("Zone not found by id :" + zoneId));
@@ -101,7 +101,7 @@ public class ContentService {
 
     /// StudyTask
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<StudyTaskDTO> getAllTaskFromZoneId(Long zoneId) {
         StudyZone zone = studyZoneRepository.findById(zoneId)
                 .orElseThrow(() -> new ZoneNotFoundException("Zone not found with id :" + zoneId));
@@ -113,7 +113,8 @@ public class ContentService {
                 .toList();
     }
 
-    @Transactional
+
+    @Transactional(readOnly = true)
     public StudyTaskDTO getTaskById(Long taskId) {
         StudyTask task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found by id :" + taskId));

@@ -30,7 +30,7 @@ public class UserService {
     public CreateUserDTO save(CreateUserDTO userDTO) {
        User user = CreateUserMapper.toEntity(userDTO);
 
-        userRepository.save(user);
+        user = userRepository.save(user);
         return CreateUserMapper.createUserDTO(user);
     }
 
@@ -71,12 +71,9 @@ public class UserService {
 
         existingUser.setUsername(updateUser.getUsername());
 
-        userRepository.save(existingUser);
 
         return UpdateUserMapper.updateUserDto(existingUser);
     }
 
-    private User findById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found with id :" + userId));
-    }
+
 }
